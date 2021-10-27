@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RandTheme</title>
+  <link rel="stylesheet" href="./css/style.min.css">
+</head>
+
+<body>
+  <div class="body__inner hidden-before">
+    <main class="main">
+      <div class="container">
+        <div class="main__inner">
+          <div class="main__body">
+            <h1 class="main__body__title">
+              RANDOMIZER
+              <span>v2.2</span>
+            </h1>
+            <div class="main__body__func main__body__func-add">
+              <h2 class="main__body__func__title">Редактировать</h2>
+              <div class="main__body__func__inner">
+                <input class="main__body__func__input" type="text" placeholder="Введите тему...">
+                <button class="main__add-btn" title="Добавить"></button>
+                <button class="main__list-btn" title="Список"></button>
+              </div>
+            </div>
+            <div class="main__body__func main__body__func-get">
+              <h2 class="main__body__func__title">Случайная тема</h2>
+              <div class="main__body__func__inner">
+                <input class="main__body__func__input" type="text" placeholder="Здесь будет тема" readonly>
+                <button class="main__get-btn" title="Обновить тему"></button>
+              </div>
+            </div>
+          </div>
+          <div class="main__lists">
+            <div class="container">
+              <div class="main__lists__inner">
+                <button class="close-lists-btn" title="Закрыть списки">Закрыть</button>
+                <div class="main__lists-item main__lists__not-completed">
+                  <h3 class="main__lists-item__title">
+                    Незавершённые
+                    <span class="clear-all-list" title="Очистить список"></span>
+                  </h3>
+                  <div class="main__lists-item__body">
+                  </div>
+                </div>
+                <div class="main__lists-item main__lists__completed lists-item--closed">
+                  <h3 class="main__lists-item__title">
+                    Завершённые
+                    <span class="clear-all-list" title="Очистить список"></span>
+                  </h3>
+                  <div class="main__lists-item__body">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  </main>
+
+  <script src="./js/main.min.js"></script>
+</body>
+
+</html>
