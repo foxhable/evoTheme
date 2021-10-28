@@ -1,16 +1,19 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import { join } from 'path';
-import { createReadStream } from 'fs';
-import favicon from 'koa-favicon';
+import { createReadStream, writeFile } from 'fs';
+import { readFile } from 'fs/promises';
 import logger from 'koa-logger';
 import { userAgent } from 'koa-useragent';
- 
+import { v4 as uuidv4 } from 'uuid';
+import bodyParser from 'koa-bodyparser';
+
 const app = new Koa;
 const router = new Router();
 
 app.use(userAgent);
 app.use(logger());
+app.use(bodyParser());
 
 router.get('/', (ctx, next) => {
   ctx.response.status = 200
@@ -30,15 +33,6 @@ router.get('/css/style.min.css', (ctx, next) => {
   ctx.response.set('Content-Type', 'text/css')
   const publicRoot = join(process.cwd(), 'public', 'css');
   const filePath = join(publicRoot, 'style.min.css');
-  ctx.body = createReadStream(filePath)
-  next();
-});
-
-router.get('/js/main.min.js', (ctx, next) => {
-  ctx.response.status = 200
-  ctx.response.set('Content-Type', 'text/javascript ')
-  const publicRoot = join(process.cwd(), 'public', 'js');
-  const filePath = join(publicRoot, 'main.min.js');
   ctx.body = createReadStream(filePath)
   next();
 });
@@ -77,6 +71,55 @@ router.get('/fonts/:foo', (ctx, next) => {
   const publicRoot = join(process.cwd(), 'public', 'fonts');
   const filePath = join(publicRoot, fileUrl);
   ctx.body = createReadStream(filePath)
+  next();
+});
+
+router.get('/get-cookie', async function (ctx, next) {
+  ctx.response.status = 200
+  const newUuid = uuidv4();
+  ctx.cookies.set('uuid', newUuid, { maxAge: 9e14, httpOnly: false });
+
+  const dataArr = JSON.parse(await readFile(new URL('./data/data.json', import.meta.url)));
+
+  dataArr[newUuid] = {"nCompleted": [], "completed": []};
+
+  const json = JSON.stringify(dataArr, null, 2);
+  writeFile('./data/data.json', json, (err) => {
+    if (err) throw err;
+  });
+
+  next();
+});
+
+router.get('/get-data', async function (ctx, next) {
+  ctx.response.status = 200;
+  ctx.response.set('Content-Type', 'application/json');
+  const uuid = ctx.cookies.get('uuid');
+
+  const dataArr = JSON.parse(await readFile(new URL('./data/data.json', import.meta.url)));
+
+  if (uuid in dataArr) {
+    const lists = dataArr[uuid];
+    const json = JSON.stringify(lists);
+    ctx.body = json;
+  }
+  next();
+});
+
+router.post('/post-data', async function (ctx, next) {
+  ctx.response.status = 200;
+  const uuid = ctx.cookies.get('uuid');
+  const data = ctx.request.body;
+  const dataArr = JSON.parse(await readFile(new URL('./data/data.json', import.meta.url)));
+
+  if (uuid in dataArr) {
+    dataArr[uuid] = data;
+    const json = JSON.stringify(dataArr, null, 2);
+    writeFile('./data/data.json', json, (err) => {
+      if (err) throw err;
+    });
+  }
+
   next();
 });
 
