@@ -83,39 +83,35 @@ router.get('/fonts/:foo', (ctx, next) => {
   next();
 });
 
-router.get('/get-cookie', async function (ctx, next) {
-  ctx.response.status = 200
-  const newUuid = uuidv4();
-  ctx.cookies.set('uuid', newUuid, { maxAge: 9e14, httpOnly: false });
-
-  const dataArr = JSON.parse(await readFile(new URL('./data/data.json', import.meta.url)));
-
-  dataArr[newUuid] = {"nCompleted": [], "completed": []};
-
-  const json = JSON.stringify(dataArr, null, 2);
-  writeFile('./data/data.json', json, (err) => {
-    if (err) throw err;
-  });
-
-  next();
-});
-
-router.get('/get-data', async function (ctx, next) {
-  ctx.response.status = 200;
-  ctx.response.set('Content-Type', 'application/json');
+router.get('/get-themes', async function (ctx, next) {
+  const allLists = JSON.parse(await readFile(new URL('./data/data.json', import.meta.url)));
   const uuid = ctx.cookies.get('uuid');
 
-  const dataArr = JSON.parse(await readFile(new URL('./data/data.json', import.meta.url)));
+  if (!uuid) {
+    const newUuid = uuidv4();
+    ctx.cookies.set('uuid', newUuid, { maxAge: 9e14, httpOnly: false });
 
-  if (uuid in dataArr) {
-    const lists = dataArr[uuid];
+    allLists[newUuid] = { "nCompleted": [], "completed": [] };
+    const json = JSON.stringify(allLists, null, 2);
+
+    writeFile('./data/data.json', json, (err) => {
+      if (err) throw err;
+    });
+
+    ctx.response.status = 200;
+    next();
+  } else if (uuid in allLists) {
+    const lists = allLists[uuid];
     const json = JSON.stringify(lists);
     ctx.body = json;
+    
+    ctx.response.set('Content-Type', 'application/json');
+    ctx.response.status = 200;
+    next();
   }
-  next();
 });
 
-router.post('/post-data', async function (ctx, next) {
+router.post('/post-themes', async function (ctx, next) {
   ctx.response.status = 200;
   const uuid = ctx.cookies.get('uuid');
   const data = ctx.request.body;
