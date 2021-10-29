@@ -37,6 +37,15 @@ router.get('/css/style.min.css', (ctx, next) => {
   next();
 });
 
+router.get('/js/main.min.js', (ctx, next) => {
+  ctx.response.status = 200
+  ctx.response.set('Content-Type', 'text/javascript')
+  const publicRoot = join(process.cwd(), 'public', 'js');
+  const filePath = join(publicRoot, 'main.min.js');
+  ctx.body = createReadStream(filePath)
+  next();
+});
+
 router.get('/images/:foo.svg', (ctx, next) => {
   const fileUrl = '/' + ctx.req.url.replace(/.*[\\\/]/, '');
   ctx.response.status = 200
