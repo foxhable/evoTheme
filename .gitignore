@@ -2,11 +2,14 @@
 node_modules/
 package-lock.json
 
+# Data
+data/
+
 # Builds 
 dist/
 
 #css
-app/css/
+**/css/
 
 #min.js file
-app/js/main.min.js
+main.min.js
