@@ -16,12 +16,11 @@ import { writeFile } from 'fs';
 import { readFile } from 'fs/promises';
 import { v4 as uuidv4 } from 'uuid';
 
-
 router.get('/get-themes', async function (ctx, next) {
   const allData = JSON.parse(await readFile(new URL('./data/data.json', import.meta.url)));
   const uuid = ctx.cookies.get('uuid');
 
-  if (!uuid) {
+  if (!uuid || !(uuid in allData)) {
     const newUuid = uuidv4();
     ctx.cookies.set('uuid', newUuid, { maxAge: 9e14, httpOnly: false });
     
@@ -33,6 +32,7 @@ router.get('/get-themes', async function (ctx, next) {
     
     allData[newUuid]["userInfo"]["browser"] = ctx.userAgent.browser + " v" + ctx.userAgent.version;
     allData[newUuid]["userInfo"]["os"]      = ctx.userAgent.os;
+    allData[newUuid]["userInfo"]["ip"]      = ctx.request.ip;
     
     allData[newUuid]["userInfo"]["entryCounts"] = 1;
     
@@ -48,6 +48,7 @@ router.get('/get-themes', async function (ctx, next) {
   
       allData[uuid]["userInfo"]["browser"] = ctx.userAgent.browser + " v" + ctx.userAgent.version;
       allData[uuid]["userInfo"]["os"]      = ctx.userAgent.os;
+      allData[uuid]["userInfo"]["ip"]      = ctx.request.ip;
       
       let n = allData[uuid]["userInfo"]["entryCounts"] || 0;
       allData[uuid]["userInfo"]["entryCounts"] = ++n;
