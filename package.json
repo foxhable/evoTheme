@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "v4",
+  "name": "rand-theme",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -18,7 +18,18 @@
     "koa-router": "^10.1.1",
     "koa-static": "^5.0.0",
     "koa-useragent": "^4.0.0",
-    "nodemon": "^2.0.12",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-sass": "^5.0.0",
+    "gulp-uglify-es": "^3.0.0",
+    "jquery": "^3.6.0",
+    "nodemon": "^2.0.12",
+    "sass": "^1.42.1"
   }
 }

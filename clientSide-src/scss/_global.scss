@@ -1,0 +1,69 @@
+html{
+  box-sizing: border-box;
+}
+
+*,
+*::before
+*::after{
+  box-sizing: inherit;
+}
+
+@font-face {
+	font-family: 'inky';
+	src: url('../fonts/Inky-Thin-Pixels.woff2') format('woff2'),
+		url('../fonts/Inky-Thin-Pixels.woff') format('woff');
+	font-weight: 600;
+	font-style: normal;
+	font-display: swap;
+}
+
+.container{
+  position: relative;
+  max-width: 1170px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+body{
+  overflow: hidden;
+  font-family: 'inky';
+  color: #fff;
+  font-size: 18px;
+  background-color: #222;
+}
+
+.body__inner{
+  position: relative;
+  overflow-x: hidden;
+  width: 100vw;
+  height: 100vh;
+
+  &::before{
+    content: '';
+    z-index: 1;
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #212121;
+    opacity: 0.9;
+    transition: all .3s;
+  }
+}
+
+.main{
+  padding: 40px 0;
+}
+
+.main__inner{
+  display: flex;
+  justify-content: center;
+}
+
+.hidden-before{
+  &::before{
+    display: none !important;
+  }
+}

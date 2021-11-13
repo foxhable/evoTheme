@@ -1,0 +1,99 @@
+@media screen and (max-width: 900px){
+  .main{
+    padding: 40px 0;
+  }
+
+  .main__inner {
+    display: block;
+  }
+
+  .body__inner{
+    &::before{
+      display: block;
+    }
+  }
+
+  .main__body,
+  .main__body--lists-open,
+  .main__lists--open{
+    transform: translateX(0);
+  }
+
+  .main__lists{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+  }
+
+  .close-lists-btn{
+    display: block;
+  }
+}
+
+@media screen and (max-width: 460px){
+  .main__body__title{
+    font-size: 65px;
+  }
+
+  .main{
+    padding: 50px 0;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .main__body__func-add .main__body__func__input{
+    width: 210px;
+  }
+
+  .main__body__func-get .main__body__func__input{
+    width: 250px;
+  }
+}
+
+@media screen and (max-width: 365px){
+  .main__body__func-add .main__body__func__input{
+    width: 190px;
+  }
+
+  .main__body__func-get .main__body__func__input{
+    width: 230px;
+  }
+}
+
+@media screen and (max-width: 335px){
+  .main__body__title{
+    font-size: 55px;
+  }
+
+  .main__body__func-add .main__body__func__input{
+    width: 180px;
+  }
+
+  .main__body__func-get .main__body__func__input{
+    width: 220px;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .main__body__func-add .main__body__func__input{
+    width: 165px;
+  }
+
+  .main__body__func-get .main__body__func__input{
+    width: 205px;
+  }
+}
+
+@media screen and (max-height: 570px){
+  .main__lists-item{
+    max-height: 300px;
+  }
+}
+
+@media screen and (max-height: 320px){
+  .main__lists-item{
+    max-height: 240px;
+  }
+}

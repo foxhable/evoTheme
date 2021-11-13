@@ -1,0 +1,101 @@
+.main__body{
+  transform: translateX(192px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform .5s;
+
+  &__title{
+    position: relative;
+    margin-bottom: 70px;
+    text-align: center;
+    font-size: 90px;
+    background-image: url('../images/logo-bg.jpg');
+    background-clip: text;
+    color: transparent;
+
+    span{
+      position: absolute;
+      bottom: 0;
+      right: 5px;
+      transform: rotate(-20deg);
+      color: #f7f1c6;
+      font-size: 18px;
+    }
+  }
+
+  &__func{
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    &__title{
+      font-size: 35px;
+    }
+
+    &__inner{
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    &__input{
+      height: 40px;
+      padding: 0 15px;
+      border-radius: 11px;
+      background-color: #2b2b2b;
+    }
+
+    &-add{
+      .main__body__func__input{
+        width: 240px;
+      }
+
+      .main__add-btn{
+        margin-left: 12px;
+        width: 31px;
+        height: 31px;
+        background-image: url('../images/add-icon.svg');
+
+        &:hover{
+          filter: invert(13%) sepia(1%) saturate(1%) hue-rotate(320deg) brightness(100%) contrast(91%);
+        }
+      }
+  
+      .main__list-btn{
+        margin-left: 10px;
+        width: 31px;
+        height: 20px;
+        background-image: url('../images/list-icon.svg');
+
+        &:hover{
+          filter: invert(13%) sepia(1%) saturate(1%) hue-rotate(320deg) brightness(100%) contrast(91%);
+        }
+      }
+    }
+
+    &-get{
+      .main__body__func__input{
+        width: 280px;
+      }
+
+      .main__get-btn{
+        margin-left: 12px;
+        width: 31px;
+        height: 31px;
+        background-image: url('../images/refresh-icon.svg');
+
+        &:hover{
+          filter: invert(13%) sepia(1%) saturate(1%) hue-rotate(320deg) brightness(100%) contrast(91%);
+        }
+      }
+    }
+
+  }
+}
+
+.main__body--lists-open{
+  transform: translateX(-40px)
+}

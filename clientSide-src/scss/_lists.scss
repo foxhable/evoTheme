@@ -1,0 +1,198 @@
+.main__lists{
+  min-width: 300px;
+  max-width: 350px;
+  width: 100%;
+  z-index: 2;
+  transform: translateX(1000px);
+  transition: transform, .3s ease-out;
+
+  &-item{
+    margin-bottom: 15px;
+    max-height: 415px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #2b2b2b;
+    transition: max-height, .3s ease-in;
+
+    &__title{
+      position: relative;
+      margin-bottom: 23px;
+      padding: 12px;
+      text-align: center;
+      font-size: 25px;
+      background-color: #363636;
+      border-radius: 10px;
+      cursor: pointer;
+
+      .clear-all-list{
+        position: absolute;
+        margin: auto 0;
+        width: 12px;
+        height: 12px;
+        top: 0;
+        bottom: 0;
+        right: 25px;
+        cursor: pointer;
+        background-image: url('../images/remove-icon.svg');
+        background-repeat: no-repeat;
+
+        &:hover{
+          filter: invert(51%) sepia(39%) saturate(718%) hue-rotate(312deg) brightness(83%) contrast(90%);
+        }
+      }
+    }
+
+    &__body{
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar{
+        width: 3px;
+        margin-top: 50px;
+        border-radius: 5px;
+      }
+
+      &::-webkit-scrollbar-track{
+        background: #3f3f3f; 
+        margin: 10px 0;
+      }
+      
+      &::-webkit-scrollbar-thumb{
+        background: #5e5e5e;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover{
+        background: #555; 
+      }
+    }
+
+    &__body-item{
+      position: relative;
+      display: flex;
+      margin-bottom: 16px;
+
+      &__text{
+        padding-right: 30px;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      &__chkbox{
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      margin-right: 9px;
+      border: 2px solid #5c5c5c;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      }
+
+      .chkbox--active{
+        position: relative;
+
+        &::before,
+        &::after{
+          content: "";
+          position: absolute;
+          display: block;
+          margin: auto;
+          right: 0;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 3px;
+          height: 9px;
+          transform: rotate(45deg);
+          background: #d7d7d7;
+          border-radius: 1px;
+        }
+        
+        &::before{
+          height: 13px;
+          top: 0px;
+          right: 4px;
+          transform: rotate(-45deg);
+        }
+
+        &::after{
+          top: 2px;
+          height: 9px;
+          right: -9px;
+        }
+      }
+      &__remove-btn{
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        top: 6px;
+        right: 15px;
+        cursor: pointer;
+        background-image: url('../images/remove-icon.svg');
+        background-repeat: no-repeat;
+
+        &::before{
+          position: absolute;
+          top: 5px;
+          right: 55px;
+          width: 250px;
+          height: 1px;
+          background: #5e2d2d;
+        }
+
+        &:hover{
+          &::before{
+            content: '';
+          }
+          
+          filter: invert(51%) sepia(39%) saturate(718%) hue-rotate(312deg) brightness(83%) contrast(90%);
+        }
+      }
+    }
+  }
+
+  .main__lists__completed{
+    background-color: #232b26;
+
+    .main__lists-item__body{
+      &::-webkit-scrollbar-track{
+        background: #344137; 
+        margin: 10px 0;
+      }
+
+      &::-webkit-scrollbar-thumb{
+        background: #4c5e53;
+        border-radius: 10px; 
+      }
+    }
+
+    .main__lists-item__title{
+      background-color: #2b362e;
+    }
+  }
+
+  .lists-item--closed{
+    max-height: 54px;
+    overflow: hidden;
+    transition: max-height, .3s ease-out;
+  }
+}
+
+.main__lists--open{
+  transform: translateX(40px);
+}
+
+.close-lists-btn{
+  display: none;
+  margin: 0 auto;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  background-color: #474747;
+  border-radius: 10px;
+}
