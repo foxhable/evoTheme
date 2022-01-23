@@ -1,27 +1,25 @@
 {
-  "type": "module",
-  "name": "rand-theme",
+  "name": "evorand",
+  "productName": "evoRand",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "App for random theme",
+  "main": "app/main.js",
   "scripts": {
-    "start": "nodemon -q src/server.js"
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "koa": "^2.13.1",
-    "koa-bodyparser": "^4.3.0",
-    "koa-favicon": "^2.1.0",
-    "koa-logger": "^3.2.1",
-    "koa-router": "^10.1.1",
-    "koa-static": "^5.0.0",
-    "koa-useragent": "^4.0.0",
-    "uuid": "^8.3.2"
-  },
+  "author": "Sevastyan Kalgin",
+  "license": "MIT",
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "del": "^6.0.0",
+    "electron": "16.0.7",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-concat": "^2.6.1",
@@ -31,5 +29,52 @@
     "jquery": "^3.6.0",
     "nodemon": "^2.0.12",
     "sass": "^1.42.1"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^4.4.5",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-updater": "^4.6.1"
+  },
+  "config": {
+    "repository": {
+      "owner": "foxhable",
+      "name": "randTheme"
+    },
+    "prerelease": true,
+    "forge": {
+      "packagerConfig": {},
+      "makers": [{
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "evorand"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "foxhable",
+              "name": "evoTheme"
+            },
+            "prerelease": true
+          }
+        }
+      ]
+    }
   }
 }

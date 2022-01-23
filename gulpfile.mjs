@@ -17,16 +17,16 @@ import del            from 'del';
 const paths = {
   styles: {
     src: 'clientSide-src/scss/style.scss',
-    dest: 'src/public/css',
-    scss: 'app/scss/**/*.scss'
+    dest: 'app/public/css',
+    scss: 'clientSide-src/scss/**/*.scss'
   },
   scripts: {
     src: 'clientSide-src/js/main.js', 
-    dest: 'src/public/js'
+    dest: 'app/public/js'
   },
   images: {
     src: 'clientSide-src/images/**/*',
-    dest: 'src/public/images'
+    dest: 'app/public/images'
   }
 }
 
