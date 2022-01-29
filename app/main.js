@@ -1,9 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
-const { autoUpdater } = require('electron-updater')
-const isDev = require('electron-is-dev')
-autoUpdater.logger = require('electron-log')
-autoUpdater.logger.transport.file.level = 'info'
-
+require('update-electron-app')({
+  repo: 'foxhable/evoTheme',
+  logger: require('electron-log')
+})
 
 const { access, appendFile, mkdir, readFile, writeFile } = require('fs/promises')
 const { constants } = require('fs')
@@ -32,10 +31,7 @@ const createWindow = () => {
   mainWindow.removeMenu()
 }
 
-app.on('ready', () => {
-  if (!isDev) autoUpdater.checkForUpdates()
-  createWindow
-})
+app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -69,30 +65,4 @@ ipcMain.on('saveData', (e, data) => {
   writeFile(appDataFilePath, data)
     .catch((err) => console.log(err))
     .then(() => { return e.returnValue = 'data Saved' })
-})
-
-autoUpdater.on('checking-for-update', () => {
-  console.log('check for updates')
-})
-
-autoUpdater.on('update-available', (info) => {
-  console.log('update available')
-  console.log(info)
-})
-
-autoUpdater.on('update-not-available', (info) => { 
-  console.log('update not available')
-})
-
-autoUpdater.on('download-progress', (progress) => { 
-  console.log('Progress', progress)
-})
-
-autoUpdater.on('update-downloaded', (info) => { 
-  console.log('Update downloaded')
-  autoUpdater.quitAndInstall()
-})
-
-autoUpdater.on('error', (error) => {
-  console.log(error)
 })

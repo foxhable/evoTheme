@@ -1,7 +1,7 @@
 {
-  "name": "evorand",
-  "productName": "evoRand",
-  "version": "1.0.0",
+  "name": "evotheme",
+  "productName": "evoTheme",
+  "version": "2.0.0",
   "description": "App for random theme",
   "main": "app/main.js",
   "scripts": {
@@ -12,42 +12,39 @@
   "keywords": [],
   "author": "Sevastyan Kalgin",
   "license": "MIT",
+  "dependencies": {
+    "electron-log": "^4.4.5",
+    "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^2.0.1"
+  },
   "devDependencies": {
+    "electron": "16.0.7",
     "@electron-forge/cli": "^6.0.0-beta.63",
     "@electron-forge/maker-deb": "^6.0.0-beta.63",
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
-    "del": "^6.0.0",
-    "electron": "16.0.7",
+    "sass": "^1.42.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-sass": "^5.0.0",
     "gulp-uglify-es": "^3.0.0",
-    "jquery": "^3.6.0",
-    "nodemon": "^2.0.12",
-    "sass": "^1.42.1"
-  },
-  "dependencies": {
-    "electron-is-dev": "^2.0.0",
-    "electron-log": "^4.4.5",
-    "electron-squirrel-startup": "^1.0.0",
-    "electron-updater": "^4.6.1"
+    "del": "^6.0.0",
+    "jquery": "^3.6.0"
   },
   "config": {
-    "repository": {
-      "owner": "foxhable",
-      "name": "randTheme"
-    },
     "prerelease": true,
     "forge": {
-      "packagerConfig": {},
-      "makers": [{
+      "packagerConfig": {
+        "ignore": "(clientSide-src|.vscode|.gitignore|gulpfile.mjs)"
+      },
+      "makers": [
+        {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "evorand"
+            "name": "evoTheme"
           }
         },
         {
@@ -63,16 +60,6 @@
         {
           "name": "@electron-forge/maker-rpm",
           "config": {}
-        },
-        {
-          "name": "@electron-forge/publisher-github",
-          "config": {
-            "repository": {
-              "owner": "foxhable",
-              "name": "evoTheme"
-            },
-            "prerelease": true
-          }
         }
       ]
     }
